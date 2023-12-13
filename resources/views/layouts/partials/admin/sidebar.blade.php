@@ -7,7 +7,26 @@
     'route' => route('admin.dashboard'),
     'active' => request()->routeIs('admin.dashboard')
     
-    ]
+    ],
+    [
+     // lista de productos
+    'name'=> 'Familias',
+    'icon'=> 'fa-solid fa-box-open',
+    'route' => route('admin.families.index'),
+    'active' => request()->routeIs('admin.families.*'),
+
+    ],
+
+    [
+     // lista de productos
+    'name'=> 'Categorias',
+    'icon'=> 'fa-solid fa-tags',
+    'route' => route('admin.categories.index'),
+    'active' => request()->routeIs('admin.categories.*'),
+
+    ],
+
+
  ];  
 @endphp
 

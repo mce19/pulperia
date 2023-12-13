@@ -15,6 +15,7 @@
 
     {{-- font-awesome --}}
     <script src="https://kit.fontawesome.com/2389263477.js" crossorigin="anonymous"></script>
+     
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -26,18 +27,13 @@
 
 <body class="font-sans antialiased" x-data="{
     sidebarOpen: false,
-}"
-:class="{
+}" :class="{
     'overflow-y-hidden': sidebarOpen
-}"
->
+}">
 
-<div class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20 sm:hidden" 
-style="display: none;" 
-x-show="sidebarOpen"
-x-on:click="sidebarOpen = false"
-> 
-</div>
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20 sm:hidden" style="display: none;" x-show="sidebarOpen"
+        x-on:click="sidebarOpen = false">
+    </div>
 
     {{-- inicio del componente tailwind --}}
 
@@ -215,7 +211,7 @@ x-on:click="sidebarOpen = false"
             </ul>
         </div>
     </aside> --}}
-       {{-- componentes llamados desde otro archivo --}}
+    {{-- componentes llamados desde otro archivo --}}
     @include('layouts.partials.admin.navigation')
     @include('layouts.partials.admin.sidebar')
 
@@ -223,15 +219,26 @@ x-on:click="sidebarOpen = false"
 
         <div class="mt-14">
 
-        
-      @include('layouts.partials.admin.breadcrumb')
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-                   
-            {{$slot}}
+            <div class="flex justify-between items-center">
+                @include('layouts.partials.admin.breadcrumb')
+               
+                @isset($action)
+                    
+                <div>
+                    {{$action}}
+                </div>
+
+                @endisset
+
+            </div>
+
+            <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+
+                {{ $slot }}
+
+            </div>
 
         </div>
-
-      </div>
 
     </div>
     {{-- fin del componente tailwind --}}
