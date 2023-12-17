@@ -31,7 +31,7 @@
             <div class="mb-4">
                 <x-label class="mb-2">Familia</x-label>
                 <div class="relative">
-                    <x-select>
+                    <x-select name="family_id">
                         @foreach ($families as $family)
                             <option value="{{ $family->id }}"
                                 @selected(old('family_id') == $family->id)>{{ $family->name }}</option>

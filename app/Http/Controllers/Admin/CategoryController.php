@@ -14,9 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(10);
+        $categories = Category::orderBy('id', 'desc')
+        ->with('family')
+        ->paginate(10);
+        
         return view('admin.categories.index', compact('categories'));
-        return view('admin.categories.index');
     }
 
     /**
@@ -93,6 +95,22 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if ($category->subcategoria->count() > 0) {
+            //    session()->flash('swal', [
+            //     'icon' =>'success',
+            //     'title' => '¡Ups!',
+            //     'text' => 'No se puede eliminar la categoria porque contiene una subcategoria.'
+            //    ]);
+            return redirect()->route('admin.categories.edit', $category);
+        }
+
+        $category->delete();
+        //    session()->flash('swal', [
+        //     'icon' =>'success',
+        //     'title' => '¡Bien hecho!',
+        //     'text' => 'Categoría eliminada correctamente.'
+        //    ]);
+
+        return redirect()->route('admin.categories.index', $category);
     }
 }

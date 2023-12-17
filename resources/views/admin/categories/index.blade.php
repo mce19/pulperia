@@ -57,7 +57,7 @@
                                 <form method="POST" action="{{ route('admin.categories.destroy', $category) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline" value="Delete">
+                                    <input type="submit" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline" value="Delete">
                                 </form>
                             </td>
                         </tr>

@@ -20,9 +20,18 @@
     [
      // lista de productos
     'name'=> 'Categorias',
-    'icon'=> 'fa-solid fa-tags',
+    'icon'=> 'fa-solid fa-tag',
     'route' => route('admin.categories.index'),
     'active' => request()->routeIs('admin.categories.*'),
+
+    ],
+
+    [
+     // lista de productos
+    'name'=> 'Subcategorias',
+    'icon'=> 'fa-solid fa-tags',
+    'route' => route('admin.subcategories.index'),
+    'active' => request()->routeIs('admin.subcategories.*'),
 
     ],
 

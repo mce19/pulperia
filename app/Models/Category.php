@@ -12,7 +12,7 @@ class Category extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'family_id',
+        'family_id'
     ];
 
     // protected $fillable = ['name', 'slug', 'image', 'icon'];
@@ -23,7 +23,7 @@ class Category extends Model
     }
 
     //Relacion uno a muchos 
-    public function subcategoria(){
+    public function subcategories(){
      return $this->hasMany(Subcategory::class);
     }
    

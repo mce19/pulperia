@@ -4,18 +4,19 @@
         'route' => route('admin.dashboard'),
     ],
     [
-        'name' => 'Familias',
+        'name' => 'Subcategoria',
     ],
 
 ]">
 
 <x-slot name="action">
-    <a class="btn btn-blue" href="{{route('admin.families.create')}}">
+    <a class="btn btn-blue" href="{{route('admin.subcategories.create')}}">
         Nuevo
       </a>
 </x-slot>
-      {{-- verificamos que allan familias de productos --}}
-    @if ($families->count())
+
+      {{-- verificamos que allan categorias de productos --}}
+    @if ($subcategories->count())
 
         {{-- Table --}}
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -26,27 +27,40 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            Nombre
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Categoria
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Familia
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Acción
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($families as $family)
+                    @foreach ($subcategories as $subcategory)
                         <tr
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $family->id }}
+                                {{ $subcategory->id }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $family->name }}
+                                {{ $subcategory->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $subcategory->category->name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $subcategory->category->family->name }}
                             </td>
                             <td class="px-6 py-4 flex items-center">
-                                <a href="{{ route('admin.families.edit', $family) }}" class="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                <form method="POST" action="{{ route('admin.families.destroy', $family) }}">
+                                <a href="{{ route('admin.subcategories.edit', $subcategory) }}" class="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            
+                                <form method="POST" action="{{ route('admin.subcategories.destroy', $subcategory) }}">
                                     @csrf
                                     @method('DELETE')
                                     <input type="submit" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline" value="Delete">
@@ -60,7 +74,7 @@
 
         {{-- paginador --}}
         <div class="mt-4">
-            {{ $families->links() }}
+            {{ $subcategories->links() }}
         </div>
 
     @else
@@ -74,7 +88,7 @@
             </svg>
             <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">Info alert!</span> Todavia no hay familias de productos registrados
+                <span class="font-medium">Info alert!</span> Todavia no hay categorias de productos registrados
             </div>
         </div>
 
