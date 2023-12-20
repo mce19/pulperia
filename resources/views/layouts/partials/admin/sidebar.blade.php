@@ -34,6 +34,14 @@
     'active' => request()->routeIs('admin.subcategories.*'),
 
     ],
+    [
+     // lista de productos
+    'name'=> 'Productos',
+    'icon'=> 'fa-solid fa-box',
+    'route' => route('admin.products.index'),
+    'active' => request()->routeIs('admin.products.*'),
+
+    ],
 
 
  ];  
