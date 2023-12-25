@@ -33,8 +33,24 @@ class ProductCreate extends Component
 
         $this->families = Family::all();
     }
+
+       // public function boot($value)
+    // {
+    //     $this->withValidator(function($validator){
+ 
+    //         if($validator->fails()){
+
+    //             $this->dispatch('swl',[
+    //             'icon' => 'error',
+    //             'title' => '¡Error!',
+    //             'text' => 'El formulario contiene errores varificalo por favor'
+    //             ]);
+    //         }
+    //     });
+    // }
   
     //si seleciono una familia  los select de categoria y subcategoria vuelven a vacion
+    
     public function updatedFamilyId(){
         $this->category_id = '';
         $this->product['subcategory_id'] = '';
@@ -63,7 +79,7 @@ class ProductCreate extends Component
     public function store(){
 
         $this->validate([
-            'image' => 'required|image|max:1024',
+            'image' => 'nullable|image|max:1024',
             'product.sku' => 'required|unique:products,sku',
             'product.name' => 'required|max:255',
             'product.description' => 'required',
@@ -71,7 +87,9 @@ class ProductCreate extends Component
             'product.subcategory_id' => 'required|exists:subcategories,id',
         ]);
         
-        $this->product['image_path'] = $this->image->store('products');
+        if ($this->image) {
+            $this->product['image_path'] = $this->image->store('products');
+        }
 
         $product = Product::create($this->product);
 

@@ -4,16 +4,14 @@
         'route' => route('admin.dashboard'),
     ],
     [
-        'name' => 'Subcategoria',
-        'route' => route('admin.subcategories.index'),
+        'name' => 'Producto',
+        'route' => route('admin.products.index'),
     ],
     [
-        'name' => 'Editar subcategoria',
+        'name' => 'Editar Producto',
     ],
 ]">
 
-
-@livewire('admin.subcategories.subcategory-edit', compact('subcategory'))
- 
+    @livewire('admin.products.product-edit', ['product' => $product])
 
 </x-admin-layout>
