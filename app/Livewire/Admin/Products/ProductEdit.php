@@ -6,8 +6,9 @@ use App\Models\Family;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Subcategory;
-use Livewire\Attributes\Computed;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Storage;
 
 class ProductEdit extends Component
 {
@@ -73,6 +74,37 @@ class ProductEdit extends Component
     {
 
     return  Subcategory::where('category_id', $this->category_id)->get();
+    }
+
+
+    public function store(){
+
+        $this->validate([
+            'image' => 'nullable|image|max:1024',
+            'productEdit.sku' => 'required|unique:products,sku, ' . $this->product->id,
+            'productEdit.name' => 'required|max:255',
+            'productEdit.description' => 'required',
+            'productEdit.price' => 'required|numeric|min:0',
+            'productEdit.subcategory_id' => 'required|exists:subcategories,id',
+        ]);
+        
+        if ($this->image) {
+            Storage::delete($this->productEdit['image_path']);
+
+            $this->productEdit['image_path'] = $this->image->store('products');
+        }
+
+        $this->product->update($this->productEdit);
+    
+        // session()->flash('swal', [
+
+        // 'icon' => 'success',
+        // 'title' => '¡Producto actualizado!',
+        // 'text' => 'El producto se actualizo correctamente',
+
+        // ]);
+ 
+        return redirect()->route('admin.products.index');
     }
 
     public function render()

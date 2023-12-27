@@ -105,7 +105,7 @@
 
             <div class="flex justify-end">
                 <x-button>
-                    Crear producto
+                    Actualizar producto
                 </x-button>
             </div>
         </div>
